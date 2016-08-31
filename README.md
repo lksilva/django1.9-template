@@ -56,7 +56,7 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
 12. Crie um projeto usando este template.
     
     ```bash
-    django-admin startproject --template=https://github.com/dewayinc/django1.9-template/archive/master.zip --name=Vagrantfile,post-receive myapp .    
+    django-admin startproject --template=https://github.com/lksilva/django1.9-template/archive/patch-1.zip --name=Vagrantfile,post-receive myapp .    
     ```
 13. Copie o `hooks/post-receive` para o servidor.
     
