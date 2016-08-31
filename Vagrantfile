@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "{{ project_name }}" do |vm_define|
   end
 
-  config.vm.network :private_network, ip: "192.168.33.15"
+  config.vm.network "public_network", bridge: "en1: Wi-Fi (AirPort)"
 
   config.vm.network "forwarded_port", guest: 80, host: 8000
 
@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
 
     # Install dependencies
     apt-get update
-    apt-get install -y python2.7-dev python-virtualenv postgresql postgresql-contrib postgresql-server-dev-9.3
+    apt-get install -y python2.7-dev python-virtualenv postgresql postgresql-contrib postgresql-server-dev-9.3 libjpeg-dev
 
     # Create user and database
     sudo -u postgres psql --command="CREATE USER {{ project_name }} WITH PASSWORD '{{ project_name }}';"
