@@ -4,6 +4,8 @@ while read oldrev newrev refname
 do
     branch=$(git rev-parse --symbolic --abbrev-ref $refname)
     if [ "master" == "$branch" ]; then
+        for line in $(cat $APP_PATH/{{ project_name }}/requirements.txt); do
+PYTHONPATH=$APP_PATH/lib/python2.7 easy_install-2.7 --install-dir=$APP_PATH/lib/python2.7 --script-dir=$APP_PATH/bin $line ; done
         GIT_WORK_TREE=$APP_PATH/{{ project_name }} git checkout -f master
         GIT_WORK_TREE=$APP_PATH/{{ project_name }} git reset --hard
         . $APP_PATH/apache2/bin/restart
