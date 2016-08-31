@@ -113,7 +113,19 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
 3. Edite o arquivo `.git/config` do repositório e adicione a linha abaixo na instrução `[remote "origin"]`
 
     ```bash
-    url = ssh://deway@web<SERVER>.webfaction.com/home/deway/webapps/<NOME_DA_APLICACAO>/<NOME_DA_APLICACAO>.git    
+    url = ssh://deway@web<SERVER>.webfaction.com/home/deway/webapps/<NOME_DA_APLICACAO>/<NOME_DA_APLICACAO>.git  
+    Acrescente uma nova url do repositório do bitbucket:
+        url = https://meuUsuario@bitbucket.org/deway/NOME_DA_APLICACAO.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    Acrescente um novo fetch
+        fetch = +refs/heads/*:refs/remotes/bitbucket/*
+    ```
+    Exemplo:
+    ```bash
+        url = ssh://deway@web522.webfaction.com/home/deway/webapps/guiabase_django/guiabase_django.git
+        url = https://LucasDeway@bitbucket.org/rafaelthemendes/deway-guia-base-django.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        fetch = +refs/heads/*:refs/remotes/bitbucket/*
     ```
 
 
