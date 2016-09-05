@@ -68,7 +68,7 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
     ```bash
     chmod +x $HOME/webapps/myapp/myapp.git/hooks/post-receive    
     ```
-15. No seu ambiente local execute o comando `pip freeze`, copie e atualize os requirements.txt.
+15. No seu ambiente local execute `pip install -r requirements.txt`, depois `pip freeze`, copie e atualize os requirements.txt.
  
 16. Na sua máquina adicione o projeto ao git `git add .` e `git commit -m "Start Project"`.
 
