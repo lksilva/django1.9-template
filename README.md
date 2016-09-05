@@ -68,24 +68,20 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
     ```bash
     chmod +x $HOME/webapps/myapp/myapp.git/hooks/post-receive    
     ```
-15. Na sua máquina adicione o projeto ao git `git add .` e `git commit -m "Start Project"`.
+15. No seu ambiente local execute o comando `pip freeze`, copie e atualize os requirements.txt.
+ 
+16. Na sua máquina adicione o projeto ao git `git add .` e `git commit -m "Start Project"`.
 
 16. Atualize o repositório remoto `git push origin master`.
-
-17. No servidor instale os pacotes da aplicação.
-
-    ```bash
-    python2.7 easy_install.py -r requirements.txt   
-    ```
-    > Após a intalação atualize o arquivo  requirements.txt com a versão dos pacotes que está usando. Ex: django==1.9.8
     
-18. Crie um arquivo `.env` como no exemplo abaixo na pasta raiz do projeto, ele deve ficar no mesmo local em que o `manage.py`. Mais informações sobre o formato do arquivo pode ser encontrado [aqui](http://django-environ.readthedocs.io/en/latest/).
+17. Modifique o arquivo `.env` e `.env-dev`, crie uma nova SECRET_KEY e atualize o DATABASE_URL com a credencial de acesso ao banco "produção" e "desenvolvimento" respectivamente. Mais informações sobre o formato do arquivo pode ser encontrado [aqui](http://django-environ.readthedocs.io/en/latest/).
     
         SECRET_KEY=K89Zz9H0pj2e8xCXEH1ac7PSqx2s4JXy
         DEBUG=True
         ALLOWED_HOSTS=*
         DATABASE_URL=postgres://user:password@host:port/db_name
 
+18. Atualize o repositório remoto novamente, passos 16 e 17.
 
 19. No servidor entre `cd $HOME/webapps/myapp/myapp/` e execute.
 
@@ -94,7 +90,9 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
     
     python2.7 manage.py collectstatic --noinput    
     ```
-19. Reinicie o servidor.
+20. No servidor entre `cd $HOME/webapps/myapp/apache2/conf` e modifique o arquivo httpd.conf
+
+21. Reinicie o servidor.
 
     ```bash
     source  $HOME/webapps/myapp/apache2/bin/restart    
@@ -114,11 +112,9 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
 
     ```bash
     url = ssh://deway@web<SERVER>.webfaction.com/home/deway/webapps/<NOME_DA_APLICACAO>/<NOME_DA_APLICACAO>.git  
-    Acrescente uma nova url do repositório do bitbucket:
-        url = https://meuUsuario@bitbucket.org/deway/NOME_DA_APLICACAO.git
+    url = https://<MEU_USUARIO>@bitbucket.org/deway/NOME_DA_APLICACAO.git
     fetch = +refs/heads/*:refs/remotes/origin/*
-    Acrescente um novo fetch
-        fetch = +refs/heads/*:refs/remotes/bitbucket/*
+    fetch = +refs/heads/*:refs/remotes/bitbucket/*
     ```
     Exemplo:
     ```bash
@@ -128,17 +124,7 @@ um `easy_install` customizado para prover a instalação de aplicações de terc
         fetch = +refs/heads/*:refs/remotes/bitbucket/*
     ```
 
-
-4. Crie um arquivo `.env` como no exemplo abaixo na pasta raiz do projeto, ele deve ficar no mesmo local em que o `manage.py`. 
-    
-        SECRET_KEY=K89Zz9H0pj2e8xCXEH1ac7PSqx2s4JXy
-        DEBUG=True
-        ALLOWED_HOSTS=*
-        DATABASE_URL=postgres://myapp:myapp@127.0.0.1:5432/myapp
-        
-    > No Vagrantfile existe a instrução para criação de um banco de dados postgres. O usuário, senha e nome do banco é o nome da aplicação.
-
-5. Entre no diretorio onde fica o `Vagrantfile` e inicie o vagrant.
+4. Entre no diretorio onde fica o `Vagrantfile` e inicie o vagrant.
 
     ```bash
     vagrant up    
